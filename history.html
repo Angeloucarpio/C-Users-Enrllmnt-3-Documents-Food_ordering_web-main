@@ -5,27 +5,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order History - Junaid & Asnawi Food Website</title>
-    <!-- Favicon -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <!-- Fontawesome CSS -->
     <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">
-    <!-- Hover CSS -->
     <link rel="stylesheet" href="css/hover-min.css">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        .order-history {
+            padding: 80px 0; /* Add padding to account for fixed navbar */
+            background-color: #f8f8f8;
+        }
+        .order-history .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .order-history h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #order-history-container {
+            margin-top: 20px;
+        }
+        .history-card {
+            background-color: #fff;
+            border: 1px solid #eee;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+        }
+        .history-card h3 {
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 8px;
+        }
+        .history-card p {
+            margin-bottom: 10px;
+            color: #777;
+        }
+        .order-items {
+            margin-top: 10px;
+            padding-left: 20px;
+            list-style-type: square;
+        }
+        .order-items li {
+            margin-bottom: 5px;
+            color: #777;
+        }
+        .history-card .total {
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        .text-center a.btn-primary {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation Section Start -->
     <header class="navbar">
         <nav id="site-top-nav" class="navbar-menu navbar-fixed-top">
             <div class="container">
-                <!-- logo -->
                 <div class="logo">
                     <a href="index.html" title="Logo">
                         <img src="img/logo.png" alt="Logo" class="img-responsive">
                     </a>
                 </div>
-                <!-- Main Menu -->
                 <div class="menu text-right">
                     <ul>
                         <li><a class="hvr-underline-from-center" href="index.html">Home</a></li>
@@ -33,35 +80,29 @@
                         <li><a class="hvr-underline-from-center" href="foods.html">Menu</a></li>
                         <li><a class="hvr-underline-from-center" href="order.html">Order</a></li>
                         <li><a class="hvr-underline-from-center" href="contact.html">Contact</a></li>
-                        <li><a class="hvr-underline-from-center" href="login.html">History</a></li>
+                        <li><a class="hvr-underline-from-center active" href="history.html">History</a></li>
                         <li class="cart-container">
                             <a id="shopping-cart" class="shopping-cart">
                                 <i class="fa fa-cart-arrow-down"></i>
                                 <span class="badge" id="cart-count">0</span>
                             </a>
-                            <div id="cart-content" class="cart-content hidden">
-                                <h3 class="text-center">Shopping Cart</h3>
-                                <table class="cart-table" border="0">
-                                    <thead>
-                                        <tr>
-                                            <th>Food</th>
-                                            <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Qty</th>
-                                            <th>Total</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="cart-items"></tbody>
+                            <div id="cart-content" class="cart-dropdown">
+                                <table class="cart-table">
+                                    <tbody id="cart-items">
+                                        </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="4">Total</th>
-                                            <th id="cart-total">$0.00</th>
-                                            <th></th>
+                                            <td colspan="2">Total:</td>
+                                            <td id="cart-total">$0.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" style="text-align: center;">
+                                                <button class="btn-primary" onclick="location.href='order.html'">Confirm Order</button>
+                                            </td>
                                         </tr>
                                     </tfoot>
                                 </table>
-                                <a href="order.html" class="btn-primary">Confirm Order</a>
+                                <div id="empty-cart" style="display:none; text-align:center; padding:10px;">Your cart is empty.</div>
                             </div>
                         </li>
                     </ul>
@@ -69,26 +110,20 @@
             </div>
         </nav>
     </header>
-    <!-- Navigation Section End -->
-
-    <!-- Order History Section Start -->
     <section class="order-history">
         <div class="container">
             <h2 class="text-center">Order History</h2>
             <div class="heading-border"></div>
 
             <div id="order-history-container">
-                <!-- Order history will be populated here -->
+                <p>Loading order history...</p>
             </div>
 
-            <div class="text-center" style="margin-top: 20px;">
+            <div class="text-center">
                 <a href="index.html" class="btn-primary">Back to Home</a>
             </div>
         </div>
     </section>
-    <!-- Order History Section End -->
-
-    <!-- Footer Section Start -->
     <section class="footer">
         <div class="container">
             <div class="grid-3">
@@ -103,7 +138,7 @@
                         <a href="foods.html">Foods</a>
                         <a href="order.html">Order</a>
                         <a href="contact.html">Contact</a>
-                        <a href="login.html">History</a>
+                        <a href="history.html">History</a>
                     </div>
                 </div>
                 <div class="social-links">
@@ -121,9 +156,6 @@
             </div>
         </div>
     </section>
-    <!-- Footer Section End -->
-
-    <!-- Copyright Section start -->
     <section class="copyright">
         <div class="container text-center">
             <p>All rights reserved. Design By <a href="#">Code Arcade</a></p>
@@ -132,45 +164,49 @@
             <i class="fa fa-angle-double-up"></i>
         </a>
     </section>
-    <!-- Copyright Section End -->
-
-    <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <!-- Jquery UI -->
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
-    <!-- Custom JS -->
     <script src="js/custom.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Get the stored orders from sessionStorage
-            const orderHistory = JSON.parse(sessionStorage.getItem('orderHistory')) || [];
-
-            const container = document.getElementById("order-history-container");
-
-            if (orderHistory.length === 0) {
-                container.innerHTML = "<p>No previous orders found. Start placing your orders!</p>";
-            } else {
-                let html = "<h3>Previous Orders</h3><table class='tbl-full' border='1'><thead><tr><th>Order Date</th><th>Items</th><th>Total</th></tr></thead><tbody>";
-
-                orderHistory.forEach(order => {
-                    let itemList = order.items.map(item => `${item.name} (x${item.quantity})`).join(", ");
-                    html += `<tr><td>${order.date}</td><td>${itemList}</td><td>$${order.total}</td></tr>`;
-                });
-
-                html += "</tbody></table>";
-                container.innerHTML = html;
-            }
+        $(document).ready(function() {
+            loadOrderHistory();
         });
+
+        function loadOrderHistory() {
+            const container = $('#order-history-container');
+            const orderHistory = localStorage.getItem('orderHistory');
+
+            if (orderHistory) {
+                const orders = JSON.parse(orderHistory);
+                if (orders.length === 0) {
+                    container.html("<p>No previous orders found. Start placing your orders!</p>");
+                } else {
+                    let html = "";
+                    orders.forEach(order => {
+                        let itemList = order.items.map(item => `${item.name} (x${item.quantity})`).join(", ");
+                        html += `
+                            <div class="history-card">
+                                <h3>Order on ${order.date}</h3>
+                                <p><strong>Name:</strong> ${order.name}</p>
+                                <p><strong>Phone:</strong> ${order.phone}</p>
+                                ${order.address ? `<p><strong>Address:</strong> ${order.address}</p>` : ''}
+                                <p><strong>Order Type:</strong> ${order.orderType.replace('_', ' ')}</p>
+                                <p><strong>Payment Method:</strong> ${order.paymentMethod} ${order.paymentDetails || ''}</p>
+                                <h4>Items:</h4>
+                                <ul class="order-items">
+                                    ${order.items.map(item => `<li>${item.name} (x${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}</li>`).join('')}
+                                </ul>
+                                <p class="total"><strong>Total:</strong> $${order.total.toFixed(2)}</p>
+                            </div>
+                        `;
+                    });
+                    container.html(html);
+                }
+            } else {
+                container.html("<p>No order history available.</p>");
+            }
+        }
     </script>
-
-    <section class="order-history">
-        <div class="container">
-            <h2 class="text-center">Order History</h2>
-            <div id="order-history"></div>
-        </div>
-    </section>
-
-
 </body>
 </html>
