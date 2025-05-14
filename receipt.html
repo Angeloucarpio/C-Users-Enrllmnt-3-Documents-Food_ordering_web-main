@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt - Junaid & Asnawi Food Website</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="css/font-awesome/css/font-awesome.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Section Start -->
+    <header class="navbar">
+        <nav id="site-top-nav" class="navbar-menu navbar-fixed-top">
+            <div class="container">
+                <!-- logo -->
+                <div class="logo">
+                    <a href="index.html" title="Logo">
+                        <img src="img/logo.png" alt="Logo" class="img-responsive">
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Navigation Section End -->
+
+    <!-- Receipt Section Start -->
+    <section class="receipt">
+        <div class="container">
+            <h2 class="text-center">Order Receipt</h2>
+
+            <div id="receipt-details">
+                <!-- Receipt details will be filled by JavaScript -->
+            </div>
+        </div>
+    </section>
+    <!-- Receipt Section End -->
+
+    <!-- Footer Section Start -->
+    <section class="footer">
+        <div class="container text-center">
+            <p>All rights reserved. Design By <a href="#">Code Arcade</a></p>
+        </div>
+    </section>
+    <!-- Footer Section End -->
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <!-- Custom JS -->
+    <script>
+        $(document).ready(function() {
+            // Retrieve the receipt data from sessionStorage
+            let receipt = JSON.parse(sessionStorage.getItem('lastReceipt'));
+
+            if (receipt) {
+                // Display the customer and order details
+                let detailsHTML = `
+                    <h3>Customer Information</h3>
+                    <p><strong>Name:</strong> ${receipt.customer.fullName}</p>
+                    <p><strong>Phone:</strong> ${receipt.customer.phone}</p>
+                    <p><strong>Email:</strong> ${receipt.customer.email}</p>
+                    <p><strong>Address:</strong> ${receipt.customer.address}</p>
+                    <h3>Order Details</h3>
+                    <table border="1" cellpadding="10">
+                        <thead>
+                            <tr>
+                                <th>Food</th>
+                                <th>Price</th>
+                                <th>Qty</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                // Add order items to the table
+                receipt.orderItems.forEach(item => {
+                    let itemTotal = item.price * item.qty;
+                    detailsHTML += `
+                        <tr>
+                            <td>${item.name}</td>
+                            <td>$${item.price}</td>
+                            <td>${item.qty}</td>
+                            <td>$${itemTotal.toFixed(2)}</td>
+                        </tr>
+                    `;
+                });
+
+                detailsHTML += `
+                        </tbody>
+                    </table>
+                    <h3>Total: $${parseFloat(receipt.total.slice(1)).toFixed(2)}</h3>
+                    <p><strong>Order Date:</strong> ${receipt.date}</p>
+                `;
+
+                // Add the receipt details to the page
+                $('#receipt-details').html(detailsHTML);
+            } else {
+                // If there's no receipt data, show an error message
+                $('#receipt-details').html('<p>No receipt found.</p>');
+            }
+        });
+    </script>
+</body>
+</html>
